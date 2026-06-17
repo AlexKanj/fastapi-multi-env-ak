@@ -23,9 +23,9 @@ provider "aws" {
 
 # Local values
 locals {
-  availability_zones   = ["${var.aws_region}a", "${var.aws_region}b"]
-  public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
-  
+  availability_zones  = ["us-west-1b", "us-west-1c"]
+  public_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24"]
+
   common_tags = {
     Project     = var.project_name
     Environment = var.environment
@@ -37,12 +37,12 @@ locals {
 module "networking" {
   source = "./modules/networking"
 
-  project_name         = var.project_name
-  environment          = var.environment
-  vpc_cidr             = "10.0.0.0/16"
-  availability_zones   = local.availability_zones
-  public_subnet_cidrs  = local.public_subnet_cidrs
-  tags                 = local.common_tags
+  project_name        = var.project_name
+  environment         = var.environment
+  vpc_cidr            = "10.0.0.0/16"
+  availability_zones  = local.availability_zones
+  public_subnet_cidrs = local.public_subnet_cidrs
+  tags                = local.common_tags
 }
 
 # Compute Module
